@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'com.krushnatkhawale'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
+
+gradlePlugin {
+    plugins {
+        helloWorld {
+            id = 'com.krushnatkhawale.helloWorld'
+            implementationClass = 'com.krushnatkhawale.plugins.helloworld.HelloWorldPlugin'
+        }
+    }
+}
