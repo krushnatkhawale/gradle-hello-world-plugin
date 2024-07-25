@@ -40,7 +40,13 @@ This example is using `gradlePlugin` to describe the plugin.
 
 ![3-configure-plugin-class.png](docs/images/3-configure-plugin-class.png)
 
+As highlighted in the screenshot,
 
+1. `helloWorld` is the name of the gradle task that can be run using gradlew command as `./gradlew helloWorld`
+2. id `com.krushnatkhawale.helloworld` is groupid of the plugin, can also be used when adding dependency or while applying as plugin
+3. implementationClass `HelloWorldPlugin` is class which will contain plugin code
+4. After gradle refresh and gradle's clean build tasks are successful, notice the plugin descriptor warning from log is gone
+5. But this has introduced new warning which then warns about another issue of HelloWorldPlugin class not found
 
 ![4-add-plugin-class.png](docs/images/4-add-plugin-class.png)
 ![5-add-task-to-plugin.png](docs/images/5-add-task-to-plugin.png)
