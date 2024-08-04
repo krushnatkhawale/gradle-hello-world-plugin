@@ -46,11 +46,40 @@ As highlighted in the screenshot,
 2. id `com.krushnatkhawale.helloworld` is groupid of the plugin, can also be used when adding dependency or while applying as plugin
 3. implementationClass `HelloWorldPlugin` is class which will contain plugin code
 4. After gradle refresh and gradle's clean build tasks are successful, notice the plugin descriptor warning from log is gone
-5. But this has introduced new warning which then warns about another issue of HelloWorldPlugin class not found
+5. But this has introduced new warning which then warns about another issue of **HelloWorldPlugin class not found**
+
+### 4. Add Plugin class
+
+In previous step, the plugin descriptor specified the plugin class so same class needs to be present at the same package that has been specified in plugin descriptor as shown below
 
 ![4-add-plugin-class.png](docs/images/4-add-plugin-class.png)
+
+So after adding the **HelloWorldPlugin** class to **com.krushnatkhawale.helloworld** package and Gradle's clean build tasks are run notice the class not found error has gone
+
+### 5. Add a task to the plugin
+
+Before adding a task, it's important to understand the difference between Gradle's **Task** and **Plugin**
+
+#### Plugin : A plugin typically affects the entire build process and can introduce/have multiple tasks and configuration options
+#### Task &nbsp; &nbsp; : A task is a single unit of work within the build process
+
+Now with that difference in mind, let's add a Task (which will perform an action) and map it to a plugin (which can have more that one task)
+
+A task can be created by extending **DefaultTask** class and which will have a method indicated as an action using `@TaskAction` annotation. Below task simply prints 'HELLO WORLD' message in the action method.
+
 ![5-add-task-to-plugin.png](docs/images/5-add-task-to-plugin.png)
+
+Once the task is added, it needs to be configured to be the part of the plugin use `create` method of `TaskContainer` class as shown in the image above (point 5 in the image). Now that the plugin and task is configured, let's run `gradlew clean build` command to ensure nothing is broken.
+Now let's see how it can be configured in other applications.
+
+### 6. Use the plugin in other applications
+
+To use and execute the `helloWorld` plugin, lets create a new application (gradle project) and configure the plugin
+
 ![6-configure-plugin-in-client-app.png](docs/images/6-configure-plugin-in-client-app.png)
+
+As you see in screenshot above, in the `build.gradle` of this new project, our plugin is configured to be used with the `id` used `com.krushnatkhawale.helloWorld` is the same id that is configured in step 3 using plugin descriptor and the `version` is the version published by step 5, but as soon as you perform a gradle refresh, notice the error plugin was not found.
+
 ![7-enable-maven-publishing.png](docs/images/7-enable-maven-publishing.png)
 ![8-point-maven-repo-to-local.png](docs/images/8-point-maven-repo-to-local.png)
 ![9-run-plugin-success.png](docs/images/9-run-plugin-success.png)
