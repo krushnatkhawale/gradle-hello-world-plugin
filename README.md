@@ -78,8 +78,20 @@ To use and execute the `helloWorld` plugin, lets create a new application (gradl
 
 ![6-configure-plugin-in-client-app.png](docs/images/6-configure-plugin-in-client-app.png)
 
-As you see in screenshot above, in the `build.gradle` of this new project, our plugin is configured to be used with the `id` used `com.krushnatkhawale.helloWorld` is the same id that is configured in step 3 using plugin descriptor and the `version` is the version published by step 5, but as soon as you perform a gradle refresh, notice the error plugin was not found.
+As you see in screenshot above, in the `build.gradle` of this new project, our plugin is configured to be used with the `id` used `com.krushnatkhawale.helloWorld` is the same id that is configured in step 3 using plugin descriptor and the `version` is the version published by step 5, but as soon as you perform a gradle refresh, **notice the error plugin was not found**.
+
+### 7. Resolve plugin not found error: publish & consume plugin to/from maven local
+
+The reason plugin not found error is being thrown is that the HelloWorldPlugin might be error free and dev-complete but it's not published. Publishing a plugin is important because publishing will keep the plugin artifacts to a common path and becomes visible/usable to/by the other applications. 
+
+The `maven-publish` plugin enables publishing capabilities to the project, let's see how it can be configured to do so.
 
 ![7-enable-maven-publishing.png](docs/images/7-enable-maven-publishing.png)
+
+In the screenshot above,
+
+1. apply plugin to our gradle plugin project simply by adding `id 'maven-publish'` to plugins section and to do a gredle refresh
+2. open run prompt
+
 ![8-point-maven-repo-to-local.png](docs/images/8-point-maven-repo-to-local.png)
 ![9-run-plugin-success.png](docs/images/9-run-plugin-success.png)
